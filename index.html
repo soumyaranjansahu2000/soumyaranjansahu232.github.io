@@ -31,6 +31,34 @@
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:var(--font-body);overflow-x:hidden;cursor:none;line-height:1.6;}
 
+/* ── SCROLL PROGRESS BAR ── */
+#progress-bar{
+  position:fixed;top:0;left:0;height:2px;width:0%;z-index:9999;
+  background:linear-gradient(90deg,var(--lime),var(--cyan),var(--violet2));
+  box-shadow:0 0 8px var(--lime),0 0 16px rgba(170,255,0,.4);
+  transition:width .1s linear;
+}
+
+/* ── TYPEWRITER ── */
+.typewriter-wrap{
+  display:inline-flex;align-items:center;gap:0;
+  font-family:var(--font-mono);font-size:.8rem;color:var(--grey2);
+  margin-top:1.2rem;line-height:1.7;
+}
+.tw-static{color:var(--cyan);font-weight:700;margin-right:.4rem;text-shadow:0 0 10px rgba(0,229,255,.4);}
+.tw-dynamic{color:var(--white);}
+.tw-cursor{
+  display:inline-block;width:2px;height:.85em;
+  background:var(--lime);margin-left:1px;
+  vertical-align:middle;
+  box-shadow:0 0 6px var(--lime);
+  animation:twBlink .7s infinite;
+}
+@keyframes twBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── COUNTER ── */
+.counter-val{display:inline-block;}
+
 /* ── CUSTOM CURSOR ── */
 #cur{position:fixed;width:10px;height:10px;background:var(--lime);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--lime),0 0 20px rgba(170,255,0,.5);transition:transform .1s,background .2s;}
 #cur2{position:fixed;width:42px;height:42px;border:1px solid rgba(170,255,0,.4);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
@@ -512,6 +540,7 @@ footer em{color:var(--lime);font-style:normal;text-shadow:0 0 8px rgba(170,255,0
 </head>
 <body>
 
+<div id="progress-bar"></div>
 <div id="cur"></div>
 <div id="cur2"></div>
 <canvas id="starfield"></canvas>
@@ -538,9 +567,12 @@ footer em{color:var(--lime);font-style:normal;text-shadow:0 0 8px rgba(170,255,0
       <div class="hero-badge"><span class="badge-dot"></span> Open to SDET / AI Tester Roles</div>
       <h1 class="hero-name">Soumyaranjan Sahu</h1>
       <p class="hero-role">
-        <strong>Software Development Engineer in Test</strong> · AI-First QA Engineer<br/>
-        Playwright · Python · LLM Test Automation · RAG · CI/CD
+        <strong>Software Development Engineer in Test</strong> · AI-First QA Engineer
       </p>
+      <div class="typewriter-wrap">
+        <span class="tw-static">&gt;_</span>
+        <span class="tw-dynamic" id="typewriter"></span><span class="tw-cursor"></span>
+      </div>
       <p class="hero-bio">
         <strong>4.6+ years</strong> building quality into software — from precision manual testing to AI-powered automation frameworks that reduce test creation effort by <strong>70%</strong>.
       </p>
@@ -561,8 +593,8 @@ footer em{color:var(--lime);font-style:normal;text-shadow:0 0 8px rgba(170,255,0
         <a href="https://github.com/soumyaranjansahu2000" target="_blank" class="btn-ghost">🐙 GitHub</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><span class="stat-val s1">4.6</span><span class="stat-label">Years in QA</span></div>
-        <div class="stat"><span class="stat-val s2">70%</span><span class="stat-label">Effort Reduced</span></div>
+        <div class="stat"><span class="stat-val s1"><span class="counter-val" data-target="4.6" data-decimal="1">0</span></span><span class="stat-label">Years in QA</span></div>
+        <div class="stat"><span class="stat-val s2"><span class="counter-val" data-target="70" data-suffix="%">0</span></span><span class="stat-label">Effort Reduced</span></div>
         <div class="stat"><span class="stat-val s3">ISTQB</span><span class="stat-label">Certified</span></div>
       </div>
     </div>
@@ -919,6 +951,79 @@ footer em{color:var(--lime);font-style:normal;text-shadow:0 0 8px rgba(170,255,0
 </footer>
 
 <script>
+// ── SCROLL PROGRESS BAR ──
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = pct + '%';
+});
+
+// ── TYPEWRITER ──
+const twEl = document.getElementById('typewriter');
+const twTexts = [
+  'Playwright Automation Expert',
+  'AI-Powered Test Engineer',
+  'LLM Test Framework Builder',
+  'RAG Pipeline Validator',
+  'Python + Pytest Specialist',
+  'CI/CD Pipeline Architect',
+  'Prompt Engineering for QA',
+  'Agentic AI Contributor',
+];
+let twIdx = 0, twChar = 0, twDeleting = false;
+function typeWrite() {
+  const current = twTexts[twIdx];
+  if (!twDeleting) {
+    twEl.textContent = current.slice(0, ++twChar);
+    if (twChar === current.length) {
+      twDeleting = true;
+      setTimeout(typeWrite, 1800);
+      return;
+    }
+    setTimeout(typeWrite, 65);
+  } else {
+    twEl.textContent = current.slice(0, --twChar);
+    if (twChar === 0) {
+      twDeleting = false;
+      twIdx = (twIdx + 1) % twTexts.length;
+      setTimeout(typeWrite, 400);
+      return;
+    }
+    setTimeout(typeWrite, 35);
+  }
+}
+setTimeout(typeWrite, 1200);
+
+// ── COUNTER ANIMATION ──
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const decimal = parseInt(el.dataset.decimal || '0');
+  const duration = 2000;
+  const steps = 60;
+  const increment = target / steps;
+  let current = 0;
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    el.textContent = current.toFixed(decimal) + suffix;
+  }, duration / steps);
+}
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(e.target);
+      counterObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter-val').forEach(el => counterObs.observe(el));
+
 // ── CURSOR ──
 const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
 let mx=0,my=0,rx=0,ry=0;
