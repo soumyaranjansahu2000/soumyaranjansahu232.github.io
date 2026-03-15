@@ -1,881 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Soumyaranjan Sahu — SDET Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Soumyaranjan Sahu | SDET Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --card: #12121a;
-    --border: #1e1e2e;
-    --cyan: #00f5d4;
-    --pink: #ff2d78;
-    --yellow: #ffd60a;
-    --purple: #b66fff;
-    --white: #f0f0ff;
-    --muted: #6e6e8a;
-    --font-display: 'Syne', sans-serif;
-    --font-mono: 'Space Mono', monospace;
-  }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
 
-  html { scroll-behavior: smooth; }
+body{
+background:#0d0f1a;
+color:white;
+overflow-x:hidden;
+}
 
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: var(--font-display);
-    overflow-x: hidden;
-    cursor: none;
-  }
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-1;
+}
 
-  /* === CUSTOM CURSOR === */
-  .cursor {
-    position: fixed; width: 12px; height: 12px;
-    background: var(--cyan); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s, background 0.2s;
-    mix-blend-mode: exclusion;
-  }
-  .cursor-ring {
-    position: fixed; width: 36px; height: 36px;
-    border: 1.5px solid var(--pink); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, border-color 0.2s;
-  }
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
 
-  /* === NOISE OVERLAY === */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0; opacity: 0.4;
-  }
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:50px;
+}
 
-  /* === NAV === */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 3rem;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
-  }
-  .nav-logo {
-    font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px;
-    color: var(--cyan); font-family: var(--font-mono);
-  }
-  .nav-logo span { color: var(--pink); }
-  nav ul { list-style: none; display: flex; gap: 2.5rem; }
-  nav a {
-    color: var(--muted); text-decoration: none;
-    font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
-    font-family: var(--font-mono);
-    transition: color 0.2s;
-  }
-  nav a:hover { color: var(--cyan); }
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+}
 
-  /* === SECTIONS === */
-  section { position: relative; z-index: 1; }
+.hero{
+margin-top:60px;
+}
 
-  /* === HERO === */
-  #hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 4rem;
-    overflow: hidden;
-  }
-  .hero-grid-bg {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,245,212,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,245,212,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-  }
-  .hero-tag {
-    font-family: var(--font-mono); font-size: 0.78rem;
-    letter-spacing: 3px; text-transform: uppercase;
-    color: var(--pink);
-    background: rgba(255,45,120,0.08);
-    border: 1px solid rgba(255,45,120,0.25);
-    display: inline-block; padding: 0.4rem 1rem;
-    border-radius: 2px; margin-bottom: 1.5rem;
-    animation: fadeUp 0.6s 0.1s both;
-  }
-  .hero-name {
-    font-size: clamp(3rem, 8vw, 7rem);
-    font-weight: 800; line-height: 0.95;
-    letter-spacing: -3px;
-    animation: fadeUp 0.7s 0.2s both;
-  }
-  .hero-name .accent-cyan { color: var(--cyan); }
-  .hero-name .accent-pink { color: var(--pink); }
-  .hero-name .accent-yellow { color: var(--yellow); }
+.hero h1{
+font-size:52px;
+}
 
-  .hero-role {
-    margin-top: 1.5rem;
-    font-family: var(--font-mono); font-size: clamp(1rem, 2vw, 1.3rem);
-    color: var(--muted);
-    animation: fadeUp 0.7s 0.35s both;
-  }
-  .hero-role span { color: var(--white); }
+.hero span{
+color:#00f5d4;
+}
 
-  .hero-desc {
-    margin-top: 1.2rem; max-width: 560px;
-    font-size: 1rem; line-height: 1.8;
-    color: var(--muted);
-    animation: fadeUp 0.7s 0.45s both;
-  }
+.btn{
+background:#00f5d4;
+color:black;
+padding:12px 20px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+margin-top:20px;
+font-weight:600;
+}
 
-  .hero-btns {
-    margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;
-    animation: fadeUp 0.7s 0.55s both;
-  }
-  .btn-primary {
-    padding: 0.85rem 2rem;
-    background: var(--cyan); color: #000;
-    font-family: var(--font-mono); font-size: 0.8rem;
-    letter-spacing: 2px; text-transform: uppercase;
-    text-decoration: none; font-weight: 700;
-    border: none; cursor: none;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0,245,212,0.35);
-  }
-  .btn-outline {
-    padding: 0.85rem 2rem;
-    background: transparent; color: var(--white);
-    font-family: var(--font-mono); font-size: 0.8rem;
-    letter-spacing: 2px; text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    cursor: none;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .btn-outline:hover { border-color: var(--purple); color: var(--purple); }
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:10px;
+margin-top:30px;
+}
 
-  .hero-stats {
-    margin-top: 4rem;
-    display: flex; gap: 3rem; flex-wrap: wrap;
-    animation: fadeUp 0.7s 0.65s both;
-  }
-  .stat { display: flex; flex-direction: column; gap: 0.3rem; }
-  .stat-num {
-    font-size: 2.4rem; font-weight: 800; line-height: 1;
-    letter-spacing: -2px;
-  }
-  .stat-label {
-    font-family: var(--font-mono); font-size: 0.7rem;
-    text-transform: uppercase; letter-spacing: 2px; color: var(--muted);
-  }
-  .s1 { color: var(--cyan); }
-  .s2 { color: var(--pink); }
-  .s3 { color: var(--yellow); }
+.skills span{
+display:inline-block;
+background:#222;
+padding:6px 12px;
+margin:6px;
+border-radius:4px;
+}
 
-  .hero-orbit {
-    position: absolute; right: 5%; top: 50%;
-    transform: translateY(-50%);
-    width: 420px; height: 420px;
-    animation: fadeUp 1s 0.3s both;
-  }
-  .orbit-ring {
-    position: absolute; border-radius: 50%;
-    border: 1px solid;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .or1 { width: 420px; height: 420px; border-color: rgba(0,245,212,0.08); animation: spin 30s linear infinite; }
-  .or2 { width: 300px; height: 300px; border-color: rgba(255,45,120,0.1); animation: spin 20s linear infinite reverse; }
-  .or3 { width: 180px; height: 180px; border-color: rgba(182,111,255,0.12); animation: spin 12s linear infinite; }
-  .orbit-center {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px; height: 80px;
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2rem;
-    box-shadow: 0 0 40px rgba(0,245,212,0.3);
-  }
-  .orbit-dot {
-    position: absolute; width: 10px; height: 10px;
-    border-radius: 50%; top: 50%; left: 50%;
-  }
-  .od1 {
-    background: var(--cyan);
-    box-shadow: 0 0 12px var(--cyan);
-    animation: orbitMove1 30s linear infinite;
-    transform-origin: 0 0;
-  }
-  .od2 {
-    background: var(--pink);
-    box-shadow: 0 0 12px var(--pink);
-    animation: orbitMove2 20s linear infinite reverse;
-    transform-origin: 0 0;
-  }
-  .od3 {
-    background: var(--yellow);
-    box-shadow: 0 0 12px var(--yellow);
-    animation: orbitMove3 12s linear infinite;
-    transform-origin: 0 0;
-  }
+.metric{margin-top:15px;}
 
-  @keyframes orbitMove1 {
-    from { transform: translate(-50%, -50%) rotate(0deg) translateX(210px); }
-    to   { transform: translate(-50%, -50%) rotate(360deg) translateX(210px); }
-  }
-  @keyframes orbitMove2 {
-    from { transform: translate(-50%, -50%) rotate(0deg) translateX(150px); }
-    to   { transform: translate(-50%, -50%) rotate(360deg) translateX(150px); }
-  }
-  @keyframes orbitMove3 {
-    from { transform: translate(-50%, -50%) rotate(0deg) translateX(90px); }
-    to   { transform: translate(-50%, -50%) rotate(360deg) translateX(90px); }
-  }
-  @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+.bar{
+height:10px;
+background:#333;
+border-radius:5px;
+overflow:hidden;
+}
 
-  /* === SECTION COMMON === */
-  .section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 3rem; }
-  .section-label {
-    font-family: var(--font-mono); font-size: 0.72rem;
-    letter-spacing: 4px; text-transform: uppercase;
-    color: var(--pink); margin-bottom: 0.8rem;
-  }
-  .section-title {
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 800; letter-spacing: -2px;
-    line-height: 1.05;
-    margin-bottom: 3rem;
-  }
+.fill{
+height:10px;
+background:#00f5d4;
+}
 
-  /* === SKILLS === */
-  #skills { background: linear-gradient(180deg, var(--bg) 0%, #0d0d18 100%); }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  .skill-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 1.8rem;
-    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-    position: relative; overflow: hidden;
-  }
-  .skill-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    opacity: 0; transition: opacity 0.25s;
-  }
-  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
-  .skill-card.c1::before { background: var(--cyan); }
-  .skill-card.c1:hover { border-color: rgba(0,245,212,0.3); }
-  .skill-card.c1:hover::before { opacity: 1; }
-  .skill-card.c2::before { background: var(--pink); }
-  .skill-card.c2:hover { border-color: rgba(255,45,120,0.3); }
-  .skill-card.c2:hover::before { opacity: 1; }
-  .skill-card.c3::before { background: var(--yellow); }
-  .skill-card.c3:hover { border-color: rgba(255,214,10,0.3); }
-  .skill-card.c3:hover::before { opacity: 1; }
-  .skill-card.c4::before { background: var(--purple); }
-  .skill-card.c4:hover { border-color: rgba(182,111,255,0.3); }
-  .skill-card.c4:hover::before { opacity: 1; }
-  .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .skill-card h3 {
-    font-size: 1rem; font-weight: 700; letter-spacing: -0.3px;
-    margin-bottom: 1rem;
-  }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .tag {
-    font-family: var(--font-mono); font-size: 0.68rem;
-    padding: 0.3rem 0.7rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 2px; color: var(--muted);
-    letter-spacing: 0.5px;
-  }
+.code{
+background:#0a0a0a;
+padding:20px;
+border-radius:6px;
+margin-top:20px;
+font-family:monospace;
+}
 
-  /* === EXPERIENCE === */
-  #experience { background: var(--bg); }
-  .exp-timeline { position: relative; padding-left: 2rem; }
-  .exp-timeline::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(180deg, var(--cyan), var(--pink), var(--purple));
-  }
-  .exp-item {
-    position: relative; margin-bottom: 3rem; padding-left: 2rem;
-  }
-  .exp-item::before {
-    content: '';
-    position: absolute; left: -2.36rem; top: 0.4rem;
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--bg); border: 2px solid var(--cyan);
-  }
-  .exp-item:nth-child(2)::before { border-color: var(--pink); }
-  .exp-period {
-    font-family: var(--font-mono); font-size: 0.7rem;
-    letter-spacing: 2px; color: var(--cyan); margin-bottom: 0.5rem;
-    text-transform: uppercase;
-  }
-  .exp-item:nth-child(2) .exp-period { color: var(--pink); }
-  .exp-role {
-    font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px;
-    margin-bottom: 0.2rem;
-  }
-  .exp-company {
-    font-family: var(--font-mono); font-size: 0.8rem;
-    color: var(--muted); margin-bottom: 1.2rem;
-  }
-  .exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .exp-list li {
-    font-size: 0.9rem; color: var(--muted); line-height: 1.6;
-    padding-left: 1.2rem; position: relative;
-  }
-  .exp-list li::before {
-    content: '▸';
-    position: absolute; left: 0; color: var(--cyan); font-size: 0.7rem;
-  }
-  .exp-item:nth-child(2) .exp-list li::before { color: var(--pink); }
+#terminal{
+background:black;
+padding:20px;
+margin-top:20px;
+border-radius:6px;
+font-family:monospace;
+color:#00ff9c;
+min-height:120px;
+}
 
-  /* === PROJECTS === */
-  #projects { background: linear-gradient(180deg, #0d0d18 0%, var(--bg) 100%); }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-  }
-  .proj-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    position: relative; overflow: hidden;
-    transition: transform 0.25s, box-shadow 0.25s;
-    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
-  }
-  .proj-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-  .proj-num {
-    font-family: var(--font-mono); font-size: 3.5rem; font-weight: 700;
-    position: absolute; right: 1.5rem; top: 1rem;
-    opacity: 0.04; line-height: 1; letter-spacing: -3px;
-  }
-  .proj-badge {
-    font-family: var(--font-mono); font-size: 0.65rem;
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: 0.25rem 0.8rem; border-radius: 2px;
-    display: inline-block; margin-bottom: 1rem;
-  }
-  .badge-cyan { background: rgba(0,245,212,0.12); color: var(--cyan); border: 1px solid rgba(0,245,212,0.2); }
-  .badge-pink { background: rgba(255,45,120,0.12); color: var(--pink); border: 1px solid rgba(255,45,120,0.2); }
-  .badge-yellow { background: rgba(255,214,10,0.12); color: var(--yellow); border: 1px solid rgba(255,214,10,0.2); }
-  .badge-purple { background: rgba(182,111,255,0.12); color: var(--purple); border: 1px solid rgba(182,111,255,0.2); }
-  .proj-card h3 {
-    font-size: 1.2rem; font-weight: 800; letter-spacing: -0.5px;
-    margin-bottom: 0.7rem;
-  }
-  .proj-desc {
-    font-size: 0.88rem; color: var(--muted); line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-  .proj-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .proj-link {
-    display: inline-flex; align-items: center; gap: 0.4rem;
-    margin-top: 1.2rem;
-    font-family: var(--font-mono); font-size: 0.72rem;
-    letter-spacing: 1px; text-transform: uppercase;
-    text-decoration: none; color: var(--cyan);
-    transition: gap 0.2s;
-  }
-  .proj-link:hover { gap: 0.7rem; }
+footer{
+margin-top:60px;
+padding:30px;
+border-top:1px solid #333;
+text-align:center;
+}
 
-  /* === CERTIFICATIONS === */
-  #certifications { background: var(--bg); }
-  .cert-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-  }
-  .cert-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: 1.8rem;
-    display: flex; flex-direction: column; gap: 1rem;
-    transition: border-color 0.2s, transform 0.2s;
-    position: relative; overflow: hidden;
-  }
-  .cert-card:hover { border-color: rgba(182,111,255,0.4); transform: translateY(-3px); }
-  .cert-icon { font-size: 2.5rem; }
-  .cert-card h3 { font-size: 1rem; font-weight: 700; }
-  .cert-card p { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
-  .cert-year {
-    position: absolute; right: 1.5rem; top: 1.5rem;
-    font-family: var(--font-mono); font-size: 0.68rem;
-    color: var(--yellow);
-    background: rgba(255,214,10,0.08);
-    border: 1px solid rgba(255,214,10,0.2);
-    padding: 0.2rem 0.6rem; border-radius: 2px;
-  }
-
-  /* === CONTACT === */
-  #contact { background: linear-gradient(180deg, var(--bg) 0%, #0d0d18 100%); }
-  .contact-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem; align-items: center;
-  }
-  .contact-headline {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800; letter-spacing: -2px; line-height: 1;
-  }
-  .contact-headline .cy { color: var(--cyan); }
-  .contact-sub {
-    margin-top: 1rem; font-size: 0.95rem;
-    color: var(--muted); line-height: 1.8; max-width: 380px;
-  }
-  .contact-links { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
-  .contact-link {
-    display: flex; align-items: center; gap: 1rem;
-    text-decoration: none; color: var(--white);
-    font-family: var(--font-mono); font-size: 0.82rem;
-    padding: 1rem 1.2rem;
-    background: var(--card); border: 1px solid var(--border);
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .contact-link:hover { border-color: var(--cyan); transform: translateX(4px); }
-  .contact-link .cl-icon { font-size: 1.2rem; width: 2rem; text-align: center; }
-  .contact-link .cl-label { color: var(--muted); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; }
-  .contact-link .cl-val { color: var(--white); font-size: 0.82rem; }
-  .contact-right {
-    background: var(--card); border: 1px solid var(--border);
-    padding: 2.5rem;
-    clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
-  }
-  .form-group { margin-bottom: 1.2rem; }
-  .form-group label {
-    display: block; font-family: var(--font-mono); font-size: 0.68rem;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 0.5rem;
-  }
-  .form-group input, .form-group textarea {
-    width: 100%; padding: 0.8rem 1rem;
-    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-    color: var(--white); font-family: var(--font-mono); font-size: 0.85rem;
-    outline: none; transition: border-color 0.2s;
-    resize: none;
-  }
-  .form-group input:focus, .form-group textarea:focus { border-color: var(--cyan); }
-  .form-submit {
-    width: 100%; padding: 0.9rem;
-    background: var(--cyan); color: #000;
-    border: none; font-family: var(--font-mono); font-size: 0.8rem;
-    letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
-    cursor: none; transition: box-shadow 0.2s;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-  }
-  .form-submit:hover { box-shadow: 0 8px 30px rgba(0,245,212,0.35); }
-
-  /* === FOOTER === */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 3rem;
-    display: flex; align-items: center; justify-content: space-between;
-    font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted);
-  }
-  footer span { color: var(--cyan); }
-
-  /* === SCROLL ANIMATION === */
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* === MOBILE === */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    nav ul { display: none; }
-    #hero { padding: 6rem 1.5rem 4rem; }
-    .section-inner { padding: 4rem 1.5rem; }
-    .hero-orbit { display: none; }
-    .contact-wrapper { grid-template-columns: 1fr; gap: 3rem; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-  }
-
-  /* === SCROLLBAR === */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
 </style>
+
 </head>
+
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div id="particles-js"></div>
 
-<!-- NAV -->
+<div class="container">
+
 <nav>
-  <div class="nav-logo">&lt;<span>SS</span>/&gt;</div>
-  <ul>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+
+<h3>&lt;SS/&gt;</h3>
+
+<div>
+<a href="#skills">Skills</a>
+<a href="#projects">Projects</a>
+<a href="#automation">Automation</a>
+<a href="#contact">Contact</a>
+</div>
+
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-tag">// Available for SDET Roles</div>
-  <h1 class="hero-name">
-    <span class="accent-cyan">Soumya</span><span class="accent-pink">ranjan</span><br/>
-    <span class="accent-yellow">Sahu</span>
-  </h1>
-  <p class="hero-role">
-    <span>Senior QA Engineer</span> → <span style="color:var(--cyan)">SDET</span> &nbsp;|&nbsp; Playwright · Python · CI/CD
-  </p>
-  <p class="hero-desc">
-    4.6+ years in Manual QA, now transitioning into automation. Building robust test frameworks with Playwright + Python, POM architecture, API validation, and GitHub Actions pipelines.
-  </p>
-  <div class="hero-btns">
-    <a href="#projects" class="btn-primary">View Projects</a>
-    <a href="mailto:soumyaranjansahu232@gmail.com" class="btn-outline">Hire Me</a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num s1">4.6+</span><span class="stat-label">Years in QA</span></div>
-    <div class="stat"><span class="stat-num s2">2</span><span class="stat-label">Companies</span></div>
-    <div class="stat"><span class="stat-num s3">ISTQB</span><span class="stat-label">Certified</span></div>
-  </div>
+<section class="hero">
 
-  <div class="hero-orbit">
-    <div class="orbit-ring or1"></div>
-    <div class="orbit-ring or2"></div>
-    <div class="orbit-ring or3"></div>
-    <div class="orbit-center">🎭</div>
-    <div class="orbit-dot od1"></div>
-    <div class="orbit-dot od2"></div>
-    <div class="orbit-dot od3"></div>
-  </div>
+<h1>Soumyaranjan <span>Sahu</span></h1>
+
+<h3>Senior QA Engineer → SDET</h3>
+
+<p>
+Automation Engineer specializing in Python, Playwright and scalable test frameworks.
+</p>
+
+<button class="btn" onclick="generateResume()">Download Resume</button>
+
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
-  <div class="section-inner">
-    <p class="section-label reveal">// 01 — Technical Arsenal</p>
-    <h2 class="section-title reveal">Skills &<br/><span style="color:var(--cyan)">Tooling</span></h2>
-    <div class="skills-grid">
-      <div class="skill-card c1 reveal">
-        <div class="skill-icon">🎭</div>
-        <h3>Playwright + Python</h3>
-        <div class="skill-tags">
-          <span class="tag">playwright</span>
-          <span class="tag">pytest</span>
-          <span class="tag">Page Object Model</span>
-          <span class="tag">fixtures</span>
-          <span class="tag">assertions</span>
-          <span class="tag">async/sync</span>
-        </div>
-      </div>
-      <div class="skill-card c2 reveal">
-        <div class="skill-icon">🔌</div>
-        <h3>API Testing</h3>
-        <div class="skill-tags">
-          <span class="tag">Playwright APIRequestContext</span>
-          <span class="tag">Postman</span>
-          <span class="tag">REST</span>
-          <span class="tag">status codes</span>
-          <span class="tag">payload validation</span>
-        </div>
-      </div>
-      <div class="skill-card c3 reveal">
-        <div class="skill-icon">⚙️</div>
-        <h3>CI/CD & DevOps</h3>
-        <div class="skill-tags">
-          <span class="tag">GitHub Actions</span>
-          <span class="tag">YAML workflows</span>
-          <span class="tag">test reports</span>
-          <span class="tag">pipeline triggers</span>
-          <span class="tag">artifacts</span>
-        </div>
-      </div>
-      <div class="skill-card c4 reveal">
-        <div class="skill-icon">🔍</div>
-        <h3>Manual QA Expertise</h3>
-        <div class="skill-tags">
-          <span class="tag">Functional</span>
-          <span class="tag">Regression</span>
-          <span class="tag">Integration</span>
-          <span class="tag">UAT</span>
-          <span class="tag">JIRA</span>
-          <span class="tag">Confluence</span>
-          <span class="tag">RTM</span>
-        </div>
-      </div>
-      <div class="skill-card c1 reveal">
-        <div class="skill-icon">🗄️</div>
-        <h3>Database & Tools</h3>
-        <div class="skill-tags">
-          <span class="tag">SQL</span>
-          <span class="tag">SELECT / WHERE / JOIN</span>
-          <span class="tag">Agile / Scrum</span>
-          <span class="tag">Slack</span>
-          <span class="tag">Git</span>
-        </div>
-      </div>
-      <div class="skill-card c2 reveal">
-        <div class="skill-icon">📱</div>
-        <h3>Platforms & Coverage</h3>
-        <div class="skill-tags">
-          <span class="tag">Web Testing</span>
-          <span class="tag">Mobile Testing</span>
-          <span class="tag">Cross-browser</span>
-          <span class="tag">Smoke & Sanity</span>
-          <span class="tag">E2E</span>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<div class="card">
+
+<h2>Skills</h2>
+
+<div class="skills">
+
+<span>Python</span>
+<span>Playwright</span>
+<span>Pytest</span>
+<span>API Testing</span>
+<span>SQL</span>
+<span>Postman</span>
+<span>Git</span>
+<span>JIRA</span>
+
+</div>
+
+</div>
+
 </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-inner">
-    <p class="section-label reveal">// 02 — Work History</p>
-    <h2 class="section-title reveal">Experience<br/><span style="color:var(--pink)">Timeline</span></h2>
-    <div class="exp-timeline">
-      <div class="exp-item reveal">
-        <p class="exp-period">Oct 2024 — Present</p>
-        <h3 class="exp-role">Senior Test Engineer</h3>
-        <p class="exp-company">Cozentus Technologies Pvt Ltd · Bhubaneswar</p>
-        <ul class="exp-list">
-          <li>Designed comprehensive manual test cases from business & functional requirements</li>
-          <li>Executed Functional, Regression, Integration, System, and UAT testing for critical modules</li>
-          <li>Validated APIs using Postman — request/response payloads, status codes, business rules</li>
-          <li>Logged and tracked defects in JIRA with reproduction steps and severity classification</li>
-          <li>Maintained test artifacts — test cases, RTM, execution reports in Confluence</li>
-          <li>Active Agile Scrum participant: sprint planning, daily stand-ups, retrospectives</li>
-        </ul>
-      </div>
-      <div class="exp-item reveal">
-        <p class="exp-period">Oct 2021 — Sep 2024</p>
-        <h3 class="exp-role">Quality Analyst</h3>
-        <p class="exp-company">Meditab Software Pvt Ltd · Ahmedabad</p>
-        <ul class="exp-list">
-          <li>Reviewed BRD, FRD, and user stories to understand application workflows</li>
-          <li>Prepared detailed manual test cases — positive, negative, and boundary scenarios</li>
-          <li>Performed Functional, Regression, Integration, and E2E testing across releases</li>
-          <li>Conducted API testing with Postman to validate data flow between integrated systems</li>
-          <li>Contributed to test planning, estimation, and release sign-off activities</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
 <section id="projects">
-  <div class="section-inner">
-    <p class="section-label reveal">// 03 — Automation Projects</p>
-    <h2 class="section-title reveal">Projects &<br/><span style="color:var(--yellow)">Builds</span></h2>
-    <div class="projects-grid">
 
-      <div class="proj-card reveal">
-        <div class="proj-num">01</div>
-        <span class="proj-badge badge-cyan">Playwright · Python</span>
-        <h3>E-Commerce UI Automation Suite</h3>
-        <p class="proj-desc">End-to-end test suite for a demo e-commerce app using Playwright + Python with full Page Object Model architecture. Covers login, product search, cart, and checkout flows.</p>
-        <div class="proj-tech">
-          <span class="tag">playwright</span>
-          <span class="tag">pytest</span>
-          <span class="tag">POM</span>
-          <span class="tag">fixtures</span>
-        </div>
-        <a href="https://github.com/soumyaranjansahu232" target="_blank" class="proj-link">View on GitHub →</a>
-      </div>
+<div class="card">
 
-      <div class="proj-card reveal">
-        <div class="proj-num">02</div>
-        <span class="proj-badge badge-pink">API Testing</span>
-        <h3>REST API Automation with Playwright</h3>
-        <p class="proj-desc">Automated API test suite using Playwright's APIRequestContext. Validates CRUD operations, authentication flows, response schemas, and error handling for a REST backend.</p>
-        <div class="proj-tech">
-          <span class="tag">APIRequestContext</span>
-          <span class="tag">status codes</span>
-          <span class="tag">JSON schema</span>
-          <span class="tag">pytest</span>
-        </div>
-        <a href="https://github.com/soumyaranjansahu232" target="_blank" class="proj-link">View on GitHub →</a>
-      </div>
+<h2>Automation Framework Architecture</h2>
 
-      <div class="proj-card reveal">
-        <div class="proj-num">03</div>
-        <span class="proj-badge badge-yellow">CI/CD</span>
-        <h3>GitHub Actions Test Pipeline</h3>
-        <p class="proj-desc">Fully automated CI pipeline using GitHub Actions that triggers Playwright tests on every push/PR. Generates HTML reports, publishes test artifacts, and sends pass/fail status.</p>
-        <div class="proj-tech">
-          <span class="tag">GitHub Actions</span>
-          <span class="tag">YAML</span>
-          <span class="tag">playwright report</span>
-          <span class="tag">artifacts</span>
-        </div>
-        <a href="https://github.com/soumyaranjansahu232" target="_blank" class="proj-link">View on GitHub →</a>
-      </div>
+<pre>
 
-      <div class="proj-card reveal">
-        <div class="proj-num">04</div>
-        <span class="proj-badge badge-purple">Manual QA</span>
-        <h3>Connect Application — DP World</h3>
-        <p class="proj-desc">Manual QA for DP-World's Connect Application at Cozentus. Designed functional + regression test cases, validated API integrations with Postman, and managed defect lifecycle in JIRA.</p>
-        <div class="proj-tech">
-          <span class="tag">Manual Testing</span>
-          <span class="tag">Postman</span>
-          <span class="tag">JIRA</span>
-          <span class="tag">RTM</span>
-        </div>
-        <a href="#" class="proj-link">Internal Project</a>
-      </div>
+tests/
+pages/
+utils/
+fixtures/
+conftest.py
+playwright.config.py
 
-    </div>
-  </div>
+Test Case
+   ↓
+Pytest
+   ↓
+Page Object Model
+   ↓
+Playwright
+   ↓
+Browser
+
+</pre>
+
+</div>
+
 </section>
 
-<!-- CERTIFICATIONS -->
-<section id="certifications">
-  <div class="section-inner">
-    <p class="section-label reveal">// 04 — Credentials</p>
-    <h2 class="section-title reveal">Certifications &<br/><span style="color:var(--purple)">Education</span></h2>
-    <div class="cert-grid">
-      <div class="cert-card reveal">
-        <div class="cert-icon">🏅</div>
-        <h3>ISTQB Foundation Level</h3>
-        <p>GASQ Certified · Global Association for Software Quality</p>
-        <div class="cert-year">2024</div>
-      </div>
-      <div class="cert-card reveal">
-        <div class="cert-icon">🎓</div>
-        <h3>B.Sc. Computer Science</h3>
-        <p>Fakir Mohan College · 72.2%</p>
-        <div class="cert-year">2020</div>
-      </div>
-      <div class="cert-card reveal" style="border-color: rgba(0,245,212,0.15);">
-        <div class="cert-icon">🎭</div>
-        <h3>Playwright with Python — Udemy</h3>
-        <p>Test Automation · UI & API · Real Projects</p>
-        <div class="cert-year" style="color: var(--cyan); background: rgba(0,245,212,0.08); border-color: rgba(0,245,212,0.2);">2025</div>
-      </div>
-      <div class="cert-card reveal" style="border-color: rgba(255,214,10,0.15);">
-        <div class="cert-icon">🐍</div>
-        <h3>Python Programming — Udemy</h3>
-        <p>Core Python · OOP · Scripting for Automation</p>
-        <div class="cert-year" style="color: var(--yellow); background: rgba(255,214,10,0.08); border-color: rgba(255,214,10,0.2);">2025</div>
-      </div>
-    </div>
-  </div>
+<section id="automation">
+
+<div class="card">
+
+<h2>Playwright Test Example</h2>
+
+<div class="code">
+
+def test_login(page):
+
+ page.goto("https://example.com")
+
+ page.get_by_placeholder("Username").fill("admin")
+
+ page.get_by_placeholder("Password").fill("admin123")
+
+ page.get_by_role("button", name="Login").click()
+
+ expect(page).to_have_url("/dashboard")
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Automation Test Simulator</h2>
+
+<button class="btn" onclick="runTest()">Run Demo Test</button>
+
+<div id="terminal"></div>
+
+</div>
+
 </section>
 
-<!-- CONTACT -->
+<section>
+
+<div class="card">
+
+<h2>Automation Metrics</h2>
+
+<div class="metric">
+UI Automation
+<div class="bar"><div class="fill" style="width:80%"></div></div>
+</div>
+
+<div class="metric">
+API Testing
+<div class="bar"><div class="fill" style="width:75%"></div></div>
+</div>
+
+<div class="metric">
+Manual QA
+<div class="bar"><div class="fill" style="width:95%"></div></div>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="card">
+
+<h2>GitHub Activity</h2>
+
+<img src="https://github-readme-stats.vercel.app/api?username=soumyaranjansahu2000&show_icons=true&theme=tokyonight">
+
+<br><br>
+
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=soumyaranjansahu2000&theme=tokyonight">
+
+</div>
+
+</section>
+
 <section id="contact">
-  <div class="section-inner">
-    <p class="section-label reveal">// 05 — Get In Touch</p>
-    <div class="contact-wrapper">
-      <div class="reveal">
-        <h2 class="contact-headline">Let's<br/><span class="cy">Work</span><br/>Together</h2>
-        <p class="contact-sub">
-          Looking for SDET / Automation Engineer roles. Open to full-time positions, contract work, or freelance projects in QA automation.
-        </p>
-        <div class="contact-links">
-          <a href="mailto:soumyaranjansahu232@gmail.com" class="contact-link">
-            <span class="cl-icon">✉️</span>
-            <div><div class="cl-label">Email</div><div class="cl-val">soumyaranjansahu232@gmail.com</div></div>
-          </a>
-          <a href="tel:+916372741771" class="contact-link">
-            <span class="cl-icon">📱</span>
-            <div><div class="cl-label">Phone</div><div class="cl-val">+91-6372741771</div></div>
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="contact-link">
-            <span class="cl-icon">💼</span>
-            <div><div class="cl-label">LinkedIn</div><div class="cl-val">Soumyaranjan Sahu</div></div>
-          </a>
-          <a href="https://github.com/soumyaranjansahu232" target="_blank" class="contact-link">
-            <span class="cl-icon">🐙</span>
-            <div><div class="cl-label">GitHub</div><div class="cl-val">soumyaranjansahu232</div></div>
-          </a>
-        </div>
-      </div>
-      <div class="reveal">
-        <div class="contact-right">
-          <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" placeholder="John Doe" />
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="john@company.com" />
-          </div>
-          <div class="form-group">
-            <label>Message</label>
-            <textarea rows="5" placeholder="Hi Soumyaranjan, we have an opportunity..."></textarea>
-          </div>
-          <button class="form-submit">Send Message →</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
+<div class="card">
+
+<h2>Contact</h2>
+
+<p>Email: soumyaranjansahu232@gmail.com</p>
+<p>Phone: +91-6372741771</p>
+
+<p>
+GitHub:
+<a href="https://github.com/soumyaranjansahu2000">
+soumyaranjansahu2000
+</a>
+</p>
+
+</div>
+
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div>Designed & Built by <span>Soumyaranjan Sahu</span> · SDET Portfolio 2025</div>
-  <div>Playwright · Python · CI/CD · <span>QA → Automation</span></div>
+
+<p>Designed & Built by Soumyaranjan Sahu</p>
+
 </footer>
 
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    setTimeout(() => {
-      ring.style.left = e.clientX + 'px';
-      ring.style.top = e.clientY + 'px';
-    }, 80);
-  });
 
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
-      }
-    });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => observer.observe(el));
+particlesJS("particles-js",{
+particles:{
+number:{value:60},
+size:{value:3},
+color:{value:"#00f5d4"},
+line_linked:{enable:true,color:"#00f5d4"},
+move:{speed:2}
+}
+});
 
-  // Form
-  document.querySelector('.form-submit').addEventListener('click', () => {
-    alert('Thanks! Message sent (connect this to a form service like Formspree for real emails).');
-  });
+function runTest(){
+
+const terminal=document.getElementById("terminal");
+
+terminal.innerHTML="Launching browser...<br>";
+
+setTimeout(()=>{terminal.innerHTML+="Navigating to login page...<br>";},1000);
+setTimeout(()=>{terminal.innerHTML+="Entering credentials...<br>";},2000);
+setTimeout(()=>{terminal.innerHTML+="Click login button...<br>";},3000);
+setTimeout(()=>{terminal.innerHTML+="Assertion passed ✔<br>";},4000);
+setTimeout(()=>{terminal.innerHTML+="Test completed ✔";},5000);
+
+}
+
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+
+const resumeData={
+name:"Soumyaranjan Sahu",
+title:"Senior QA Engineer → SDET",
+email:"soumyaranjansahu232@gmail.com",
+phone:"+91-6372741771",
+skills:["Python","Playwright","Pytest","API Testing","SQL","Git","JIRA"]
+};
+
+function generateResume(){
+
+const { jsPDF } = window.jspdf;
+
+const doc=new jsPDF();
+
+doc.text(resumeData.name,20,20);
+doc.text(resumeData.title,20,30);
+doc.text("Email: "+resumeData.email,20,40);
+doc.text("Phone: "+resumeData.phone,20,50);
+
+doc.text("Skills:",20,70);
+
+let y=80;
+
+resumeData.skills.forEach(skill=>{
+doc.text("- "+skill,20,y);
+y+=7;
+});
+
+doc.save("Soumyaranjan_Sahu_Resume.pdf");
+
+}
+
+</script>
+
 </body>
 </html>
