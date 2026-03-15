@@ -255,6 +255,32 @@ section{position:relative;z-index:2;}
 .acc{color:var(--cyan);text-shadow:0 0 20px rgba(0,229,255,.3);}
 .acc2{color:var(--violet2);text-shadow:0 0 20px rgba(192,132,252,.3);}
 
+/* ROADMAP */
+.roadmap-item{
+  background:rgba(255,255,255,.02);border:1px solid var(--border);
+  border-radius:10px;padding:1.2rem 1.4rem;
+  transition:border-color .25s,transform .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.roadmap-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;}
+.roadmap-item.done::before{background:linear-gradient(180deg,var(--lime),var(--cyan));}
+.roadmap-item.active::before{background:linear-gradient(180deg,var(--cyan),var(--violet2));}
+.roadmap-item.next::before{background:linear-gradient(180deg,var(--violet2),var(--pink));}
+.roadmap-item:hover{transform:translateX(4px);box-shadow:0 8px 25px rgba(0,0,0,.4);}
+.roadmap-item.done:hover{border-color:rgba(170,255,0,.25);}
+.roadmap-item.active:hover{border-color:rgba(0,229,255,.25);}
+.roadmap-item.next:hover{border-color:rgba(192,132,252,.25);}
+.ri-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap;}
+.ri-icon{font-size:1.3rem;}
+.ri-title{font-family:var(--font-display);font-size:.95rem;font-weight:700;flex:1;}
+.ri-badge{font-family:var(--font-mono);font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;padding:.18rem .65rem;border-radius:20px;}
+.done-b{background:rgba(170,255,0,.1);border:1px solid rgba(170,255,0,.3);color:var(--lime);}
+.active-b{background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);color:var(--cyan);}
+.next-b{background:rgba(192,132,252,.1);border:1px solid rgba(192,132,252,.25);color:var(--violet2);}
+.ri-desc{font-size:.8rem;color:var(--grey);line-height:1.65;margin-bottom:.75rem;}
+.ri-tags{display:flex;flex-wrap:wrap;gap:.35rem;}
+.ri-tags span{font-family:var(--font-mono);font-size:.58rem;padding:.16rem .58rem;border:1px solid var(--border2);color:var(--grey2);border-radius:3px;}
+
 /* SKILLS */
 #skills{padding:7rem 0;}
 .skills-layout{display:grid;grid-template-columns:230px 1fr;gap:3rem;align-items:start;}
@@ -596,6 +622,7 @@ footer em{color:var(--lime);font-style:normal;text-shadow:0 0 8px rgba(170,255,0
         <button class="skill-tab" onclick="showSkill('api',this)">🔌 API Testing</button>
         <button class="skill-tab" onclick="showSkill('ai',this)">🤖 AI / LLM</button>
         <button class="skill-tab" onclick="showSkill('cicd',this)">⚙️ CI/CD & Tools</button>
+        <button class="skill-tab" onclick="showSkill('roadmap',this)">🚀 AI Roadmap</button>
       </div>
       <div>
         <div id="sp-auto" class="skills-pane active">
@@ -642,6 +669,93 @@ footer em{color:var(--lime);font-style:normal;text-shadow:0 0 8px rgba(170,255,0
             <div class="bar-row"><div class="bar-info"><span>GitHub Actions</span><span>80%</span></div><div class="bar-track"><div class="bar-fill bl" style="width:80%"></div></div></div>
             <div class="bar-row"><div class="bar-info"><span>Git</span><span>78%</span></div><div class="bar-track"><div class="bar-fill bl" style="width:78%"></div></div></div>
             <div class="bar-row"><div class="bar-info"><span>JIRA</span><span>92%</span></div><div class="bar-track"><div class="bar-fill bl" style="width:92%"></div></div></div>
+          </div>
+        </div>
+        <div id="sp-roadmap" class="skills-pane">
+          <h3 class="pane-title">AI Testing Roadmap 🚀</h3>
+          <p style="font-size:.82rem;color:var(--grey);margin-bottom:1.4rem;line-height:1.7;">Skills I am actively learning to become a future-ready AI Tester — from GenAI fundamentals to agentic frameworks.</p>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+
+            <div class="roadmap-item done">
+              <div class="ri-header">
+                <span class="ri-icon">🐍</span>
+                <span class="ri-title">Python for AI Testing</span>
+                <span class="ri-badge done-b">✓ Strong</span>
+              </div>
+              <p class="ri-desc">Core Python, OOP, scripting for test automation and AI integrations. Used daily in Playwright frameworks.</p>
+              <div class="ri-tags"><span>Python 3</span><span>OOP</span><span>Scripting</span><span>Pytest</span></div>
+            </div>
+
+            <div class="roadmap-item active">
+              <div class="ri-header">
+                <span class="ri-icon">🤖</span>
+                <span class="ri-title">GenAI & LLMs</span>
+                <span class="ri-badge active-b">Learning</span>
+              </div>
+              <p class="ri-desc">Understanding Generative AI and Large Language Models — how they work, how to test them, prompt engineering, and output validation.</p>
+              <div class="ri-tags"><span>GenAI</span><span>LLMs</span><span>GPT-4</span><span>Claude</span><span>Gemini</span><span>Prompt Engineering</span></div>
+            </div>
+
+            <div class="roadmap-item active">
+              <div class="ri-header">
+                <span class="ri-icon">🗂️</span>
+                <span class="ri-title">RAG (Retrieval-Augmented Generation)</span>
+                <span class="ri-badge active-b">Learning</span>
+              </div>
+              <p class="ri-desc">Testing RAG pipelines — retrieval accuracy, context relevance, vector DB validation, chunking strategies, and hallucination detection.</p>
+              <div class="ri-tags"><span>RAG</span><span>Vector DB</span><span>Embeddings</span><span>ChromaDB</span><span>Pinecone</span></div>
+            </div>
+
+            <div class="roadmap-item active">
+              <div class="ri-header">
+                <span class="ri-icon">💻</span>
+                <span class="ri-title">GitHub Copilot</span>
+                <span class="ri-badge active-b">Learning</span>
+              </div>
+              <p class="ri-desc">Using AI-powered coding assistant to write test scripts faster, generate boilerplate POM code, and auto-complete Playwright test cases.</p>
+              <div class="ri-tags"><span>GitHub Copilot</span><span>AI Pair Programming</span><span>Code Generation</span></div>
+            </div>
+
+            <div class="roadmap-item next">
+              <div class="ri-header">
+                <span class="ri-icon">🔗</span>
+                <span class="ri-title">LangChain</span>
+                <span class="ri-badge next-b">Next Up</span>
+              </div>
+              <p class="ri-desc">Building and testing LLM-powered applications using LangChain — chains, agents, tools, memory, and evaluations for QA pipelines.</p>
+              <div class="ri-tags"><span>LangChain</span><span>Chains</span><span>Tools</span><span>Memory</span><span>LLMOps</span></div>
+            </div>
+
+            <div class="roadmap-item next">
+              <div class="ri-header">
+                <span class="ri-icon">⚡</span>
+                <span class="ri-title">AI Agents & AutoGen</span>
+                <span class="ri-badge next-b">Next Up</span>
+              </div>
+              <p class="ri-desc">Testing multi-agent systems built with AutoGen — validating agent collaboration, decision-making, tool usage, and error recovery in autonomous workflows.</p>
+              <div class="ri-tags"><span>AutoGen</span><span>AI Agents</span><span>Multi-Agent</span><span>Tool Use</span><span>Autonomous</span></div>
+            </div>
+
+            <div class="roadmap-item next">
+              <div class="ri-header">
+                <span class="ri-icon">🔌</span>
+                <span class="ri-title">MCP (Model Context Protocol)</span>
+                <span class="ri-badge next-b">Next Up</span>
+              </div>
+              <p class="ri-desc">Testing MCP servers and clients — validating tool integrations, context passing, and AI-to-tool communication in agentic applications.</p>
+              <div class="ri-tags"><span>MCP</span><span>Model Context Protocol</span><span>Tool Integration</span><span>Anthropic</span></div>
+            </div>
+
+            <div class="roadmap-item next">
+              <div class="ri-header">
+                <span class="ri-icon">🎯</span>
+                <span class="ri-title">Vibe Coding (Vibium)</span>
+                <span class="ri-badge next-b">Exploring</span>
+              </div>
+              <p class="ri-desc">AI-assisted development and testing using natural language-driven coding tools — write tests by describing behaviour in plain English.</p>
+              <div class="ri-tags"><span>Vibium</span><span>Vibe Coding</span><span>NL-to-Code</span><span>AI-first Dev</span></div>
+            </div>
+
           </div>
         </div>
       </div>
